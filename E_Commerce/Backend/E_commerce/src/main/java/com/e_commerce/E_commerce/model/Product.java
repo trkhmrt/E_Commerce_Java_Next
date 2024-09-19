@@ -1,6 +1,7 @@
 package com.e_commerce.E_commerce.model;
-import com.e_commerce.E_commerce.model.Views;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,8 +28,8 @@ public class Product  extends BaseEnttiy {
     @Column(name = "category_id", insertable = false, updatable = false)
     private Long categoryId;
 
-    @JsonView(Views.Detailed.class)
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
