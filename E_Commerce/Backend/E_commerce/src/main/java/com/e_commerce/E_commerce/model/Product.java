@@ -1,17 +1,17 @@
 package com.e_commerce.E_commerce.model;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
+@Builder
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
@@ -35,6 +35,12 @@ public class Product  extends BaseEnttiy {
 
 
 
-    @ManyToMany(mappedBy = "products")
-    private Set<Basket> baskets = new HashSet<>();
+    @ManyToMany(mappedBy = "products", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Basket> baskets = new ArrayList<>();
+
+
+    @Override
+    public String toString() {
+        return "Product{id=" + id + ", name='" + name + "', description='" + description + "', price=" + price + "}";
+    }
 }

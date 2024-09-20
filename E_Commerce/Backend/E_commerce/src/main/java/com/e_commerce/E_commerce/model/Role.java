@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -19,6 +21,6 @@ public class Role  extends BaseEnttiy  {
 
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
+    @ManyToMany(mappedBy = "roles",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<User> users = new ArrayList<>();
 }

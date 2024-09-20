@@ -1,13 +1,12 @@
 package com.e_commerce.E_commerce.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,31 +23,28 @@ public class User  extends BaseEnttiy   {
     private String email;
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_roles", // Ortak tablo ismi
             joinColumns = @JoinColumn(name = "user_id"), // User id ile eşleştirilen sütun
             inverseJoinColumns = @JoinColumn(name = "role_id") // Role id ile eşleştirilen sütun
     )
-    private Set<Role> roles = new HashSet<>();
+    private List<Role> roles = new ArrayList<>();
 
 
     @OneToOne(mappedBy = "user")
+    @ToString.Exclude
     private Basket basket;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
