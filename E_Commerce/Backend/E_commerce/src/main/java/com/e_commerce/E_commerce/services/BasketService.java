@@ -22,17 +22,15 @@ public class BasketService {
     private final UserRepository userRepository;
 
     public void addProductToBasket(Long userId,Long productId) {
-        // Kullanıcıyı bul
+
         User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-        // Sepeti bul
+
         Basket basket = user.getBasket();
 
-        // Ürünü bul
+
         Product product = productRepository.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
 
-        // Eğer ürün zaten sepette yoksa ekle
-        List<Product> products = basket.getProducts();
 
         if (basket.getProducts().contains(product)) {
             System.out.println("Product already exists");
@@ -40,10 +38,10 @@ public class BasketService {
         else{
             basket.getProducts().add(product);
 
-            // Toplam fiyatı güncelle
+
             basket.setTotalprice(basket.getTotalprice() + product.getPrice());
 
-            // Sepeti kaydet
+
             userRepository.save(user);
         }
 

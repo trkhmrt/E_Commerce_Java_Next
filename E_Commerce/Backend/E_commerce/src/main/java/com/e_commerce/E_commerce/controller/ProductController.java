@@ -62,6 +62,14 @@ public class ProductController {
 
 
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+
+        if (productService.getProductById(id) == null) {
+
+        }
+        return ResponseEntity.notFound().build();
+    }
 
 
 }
