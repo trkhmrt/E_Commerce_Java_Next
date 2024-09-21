@@ -66,10 +66,13 @@ public class ProductController {
     public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
 
         if (productService.getProductById(id) == null) {
-
+            productService.deleteProduct(id);
+            return ResponseEntity.ok("Product Deleted");
         }
         return ResponseEntity.notFound().build();
     }
+
+
 
 
 }

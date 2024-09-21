@@ -5,16 +5,14 @@ import lombok.*;
 
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User  extends BaseEnttiy   {
+public class User  extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,4 +45,12 @@ public class User  extends BaseEnttiy   {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Favori> favorites;
+
+    @OneToMany(mappedBy="user",cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+
 }

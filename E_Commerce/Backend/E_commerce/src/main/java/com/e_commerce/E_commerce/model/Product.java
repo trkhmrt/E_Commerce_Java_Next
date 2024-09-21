@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
-public class Product  extends BaseEnttiy {
+public class Product  extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,4 +43,13 @@ public class Product  extends BaseEnttiy {
     public String toString() {
         return "Product{id=" + id + ", name='" + name + "', description='" + description + "', price=" + price + "}";
     }
+
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+    private List<Favori> favoritedByUsers;
+
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+
+
 }

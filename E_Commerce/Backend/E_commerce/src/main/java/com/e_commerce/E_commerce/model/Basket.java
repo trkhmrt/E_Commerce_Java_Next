@@ -4,16 +4,14 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Basket extends BaseEnttiy{
+public class Basket extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

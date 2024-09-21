@@ -6,15 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role  extends BaseEnttiy  {
+public class Role  extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

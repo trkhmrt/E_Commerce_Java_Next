@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @MappedSuperclass
-public class BaseEnttiy {
+public class BaseEntity {
 
 
     // Getters and Setters

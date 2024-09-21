@@ -5,24 +5,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category  extends BaseEntity {
+public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Product> products = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name="category_id")
+    private Category category;
 
-    @OneToMany(mappedBy = "category")
-    private List<SubCategory> subCategories;
 
 
 
