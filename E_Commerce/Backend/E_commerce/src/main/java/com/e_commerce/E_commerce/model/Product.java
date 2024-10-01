@@ -1,5 +1,6 @@
 package com.e_commerce.E_commerce.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ public class Product  extends BaseEntity {
     @Column(name = "category_id", insertable = false, updatable = false)
     private Long categoryId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
@@ -36,6 +37,7 @@ public class Product  extends BaseEntity {
 
 
     @ManyToMany(mappedBy = "products", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Basket> baskets = new ArrayList<>();
 
 
@@ -44,10 +46,12 @@ public class Product  extends BaseEntity {
         return "Product{id=" + id + ", name='" + name + "', description='" + description + "', price=" + price + "}";
     }
 
-    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Favori> favoritedByUsers;
 
-    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Comment> comments;
 
 

@@ -1,24 +1,26 @@
 package com.e_commerce.E_commerce.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-public class Role  extends BaseEntity {
+@Table(name = "roles")
+public class Role  extends BaseEntity implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    public Long id;
 
-    private String name;
+    public String name;
 
-    @ManyToMany(mappedBy = "roles",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<User> users = new ArrayList<>();
+    @Override
+    public String getAuthority() {
+        return name;
+    }
 }

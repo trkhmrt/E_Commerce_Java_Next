@@ -3,11 +3,14 @@ package com.e_commerce.E_commerce.controller;
 
 import com.e_commerce.E_commerce.dto.ProductDto;
 import com.e_commerce.E_commerce.model.Product;
+import com.e_commerce.E_commerce.model.User;
 import com.e_commerce.E_commerce.services.ProductService;
 import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +34,18 @@ public class ProductController {
     public ResponseEntity<List<Product>> getAllProducts() {
 
         List<Product> products = productService.getAllProduct();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getPrincipal().getClass());
+
+
+        System.out.println(authentication.getName());
+        //Long userId = Long.parseLong(authentication.getName());
+        System.out.println(authentication.getPrincipal());
+        User user = (User) authentication.getPrincipal();
+        System.out.println(user.getId());
+
+
         return ResponseEntity.ok(products);
 
     }
